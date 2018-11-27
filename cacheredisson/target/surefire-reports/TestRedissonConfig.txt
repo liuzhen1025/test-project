@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: TestRedissonConfig
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 14.306 s <<< FAILURE! - in TestRedissonConfig
+configTest(TestRedissonConfig)  Time elapsed: 14.125 s  <<< ERROR!
+org.redisson.client.RedisConnectionException: Can't connect to servers!
+	at TestRedissonConfig.configTest(TestRedissonConfig.java:32)
+Caused by: io.netty.channel.ConnectTimeoutException: connection timed out: 172.17.0.6/172.17.0.6:7003
+

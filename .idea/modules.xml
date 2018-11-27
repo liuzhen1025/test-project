@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cacheredisson/cacheredisson.iml" filepath="$PROJECT_DIR$/cacheredisson/cacheredisson.iml" />
+      <module fileurl="file://$PROJECT_DIR$/desinger-pattern-master-worker/desinger-pattern-master-worker.iml" filepath="$PROJECT_DIR$/desinger-pattern-master-worker/desinger-pattern-master-worker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exceldeal/exceldeal.iml" filepath="$PROJECT_DIR$/exceldeal/exceldeal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jsonpathstudy/jsonpathstudy.iml" filepath="$PROJECT_DIR$/jsonpathstudy/jsonpathstudy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mytest-project.iml" filepath="$PROJECT_DIR$/mytest-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/websocket/websocket.iml" filepath="$PROJECT_DIR$/websocket/websocket.iml" />
+    </modules>
+  </component>
+</project>

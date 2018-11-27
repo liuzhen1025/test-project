@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="TestRedissonConfig" time="14.306" tests="1" errors="1" skipped="0" failures="0">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.class.path" value="D:\workarea\sourcecode\mytest-project\cacheredisson\target\test-classes;D:\workarea\sourcecode\mytest-project\cacheredisson\target\classes;C:\Users\lz\.m2\repository\junit\junit\4.10\junit-4.10.jar;C:\Users\lz\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar;C:\Users\lz\.m2\repository\org\redisson\redisson\3.9.0\redisson-3.9.0.jar;C:\Users\lz\.m2\repository\io\netty\netty-common\4.1.30.Final\netty-common-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-codec\4.1.30.Final\netty-codec-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-buffer\4.1.30.Final\netty-buffer-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-transport\4.1.30.Final\netty-transport-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-resolver\4.1.30.Final\netty-resolver-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-resolver-dns\4.1.30.Final\netty-resolver-dns-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-codec-dns\4.1.30.Final\netty-codec-dns-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-handler\4.1.30.Final\netty-handler-4.1.30.Final.jar;C:\Users\lz\.m2\repository\javax\cache\cache-api\1.0.0\cache-api-1.0.0.jar;C:\Users\lz\.m2\repository\io\projectreactor\reactor-core\3.2.0.RELEASE\reactor-core-3.2.0.RELEASE.jar;C:\Users\lz\.m2\repository\org\reactivestreams\reactive-streams\1.0.2\reactive-streams-1.0.2.jar;C:\Users\lz\.m2\repository\io\reactivex\rxjava2\rxjava\2.1.13\rxjava-2.1.13.jar;C:\Users\lz\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\lz\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.9.7\jackson-dataformat-yaml-2.9.7.jar;C:\Users\lz\.m2\repository\org\yaml\snakeyaml\1.23\snakeyaml-1.23.jar;C:\Users\lz\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.9.7\jackson-core-2.9.7.jar;C:\Users\lz\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.9.7\jackson-databind-2.9.7.jar;C:\Users\lz\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.9.0\jackson-annotations-2.9.0.jar;C:\Users\lz\.m2\repository\net\bytebuddy\byte-buddy\1.8.17\byte-buddy-1.8.17.jar;C:\Users\lz\.m2\repository\org\jodd\jodd-bean\3.7.1\jodd-bean-3.7.1.jar;C:\Users\lz\.m2\repository\org\jodd\jodd-core\3.7.1\jodd-core-3.7.1.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="D:\Program Files\Java\jdk1.8.0_151\jre\bin"/>
+    <property name="sun.java.command" value="C:\Users\lz\AppData\Local\Temp\surefire1231787151306946693\surefirebooter617099891009834747.jar C:\Users\lz\AppData\Local\Temp\surefire1231787151306946693 2018-11-12T18-53-55_153-jvmRun1 surefire9106459057421742964tmp surefire_07940541097891587835tmp"/>
+    <property name="surefire.test.class.path" value="D:\workarea\sourcecode\mytest-project\cacheredisson\target\test-classes;D:\workarea\sourcecode\mytest-project\cacheredisson\target\classes;C:\Users\lz\.m2\repository\junit\junit\4.10\junit-4.10.jar;C:\Users\lz\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar;C:\Users\lz\.m2\repository\org\redisson\redisson\3.9.0\redisson-3.9.0.jar;C:\Users\lz\.m2\repository\io\netty\netty-common\4.1.30.Final\netty-common-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-codec\4.1.30.Final\netty-codec-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-buffer\4.1.30.Final\netty-buffer-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-transport\4.1.30.Final\netty-transport-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-resolver\4.1.30.Final\netty-resolver-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-resolver-dns\4.1.30.Final\netty-resolver-dns-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-codec-dns\4.1.30.Final\netty-codec-dns-4.1.30.Final.jar;C:\Users\lz\.m2\repository\io\netty\netty-handler\4.1.30.Final\netty-handler-4.1.30.Final.jar;C:\Users\lz\.m2\repository\javax\cache\cache-api\1.0.0\cache-api-1.0.0.jar;C:\Users\lz\.m2\repository\io\projectreactor\reactor-core\3.2.0.RELEASE\reactor-core-3.2.0.RELEASE.jar;C:\Users\lz\.m2\repository\org\reactivestreams\reactive-streams\1.0.2\reactive-streams-1.0.2.jar;C:\Users\lz\.m2\repository\io\reactivex\rxjava2\rxjava\2.1.13\rxjava-2.1.13.jar;C:\Users\lz\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\lz\.m2\repository\com\fasterxml\jackson\dataformat\jackson-dataformat-yaml\2.9.7\jackson-dataformat-yaml-2.9.7.jar;C:\Users\lz\.m2\repository\org\yaml\snakeyaml\1.23\snakeyaml-1.23.jar;C:\Users\lz\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.9.7\jackson-core-2.9.7.jar;C:\Users\lz\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.9.7\jackson-databind-2.9.7.jar;C:\Users\lz\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.9.0\jackson-annotations-2.9.0.jar;C:\Users\lz\.m2\repository\net\bytebuddy\byte-buddy\1.8.17\byte-buddy-1.8.17.jar;C:\Users\lz\.m2\repository\org\jodd\jodd-bean\3.7.1\jodd-bean-3.7.1.jar;C:\Users\lz\.m2\repository\org\jodd\jodd-core\3.7.1\jodd-core-3.7.1.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\lz"/>
+    <property name="user.language" value="zh"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.home" value="D:\Program Files\Java\jdk1.8.0_151\jre"/>
+    <property name="basedir" value="D:\workarea\sourcecode\mytest-project\cacheredisson"/>
+    <property name="file.separator" value="\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\lz\AppData\Local\Temp\surefire1231787151306946693\surefirebooter617099891009834747.jar"/>
+    <property name="sun.boot.class.path" value="D:\Program Files\Java\jdk1.8.0_151\jre\lib\resources.jar;D:\Program Files\Java\jdk1.8.0_151\jre\lib\rt.jar;D:\Program Files\Java\jdk1.8.0_151\jre\lib\sunrsasign.jar;D:\Program Files\Java\jdk1.8.0_151\jre\lib\jsse.jar;D:\Program Files\Java\jdk1.8.0_151\jre\lib\jce.jar;D:\Program Files\Java\jdk1.8.0_151\jre\lib\charsets.jar;D:\Program Files\Java\jdk1.8.0_151\jre\lib\jfr.jar;D:\Program Files\Java\jdk1.8.0_151\jre\classes"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="1.8.0_151-b12"/>
+    <property name="user.name" value="lz"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.endorsed.dirs" value="D:\Program Files\Java\jdk1.8.0_151\jre\lib\endorsed"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="GBK"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\lz\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\lz\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2017.1.4"/>
+    <property name="java.version" value="1.8.0_151"/>
+    <property name="user.dir" value="D:\workarea\sourcecode\mytest-project\cacheredisson"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="D:\Program Files\Java\jdk1.8.0_151\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\NetSarang;D:\developer\apache-maven-3.5.0\bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\Program Files\TortoiseGit\bin;C:\Program Files\OpenVPN\bin;D:\Program Files\mysql-5.6.37-winx64\bin;D:\developer\hadoop-2.7.5\bin;C:\Users\lz\Downloads\spark-2.2.1-bin-hadoop2.7\jars;C:\Users\lz\Downloads\spark-2.2.1-bin-hadoop2.7\bin;D:\Program Files\Java\jdk1.8.0_151\bin;D:\Program Files\Java\jdk1.8.0_151\\jre\lib\rt.jar;;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Program Files\nodejs\;C:\WINDOWS\System32\OpenSSH\;C:\Users\lz\AppData\Local\Microsoft\WindowsApps;C:\Users\lz\Downloads\spark-2.2.1-bin-hadoop2.7\jars;C:\Users\lz\Downloads\spark-2.2.1-bin-hadoop2.7\bin;C:\Users\lz\AppData\Roaming\npm;;."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="25.151-b12"/>
+    <property name="java.ext.dirs" value="D:\Program Files\Java\jdk1.8.0_151\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="52.0"/>
+  </properties>
+  <testcase name="configTest" classname="TestRedissonConfig" time="14.125">
+    <error message="Can&apos;t connect to servers!" type="org.redisson.client.RedisConnectionException">org.redisson.client.RedisConnectionException: Can't connect to servers!
+	at TestRedissonConfig.configTest(TestRedissonConfig.java:32)
+Caused by: io.netty.channel.ConnectTimeoutException: connection timed out: 172.17.0.6/172.17.0.6:7003
+</error>
+    <system-out><![CDATA[-=------
+]]></system-out>
+    <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+]]></system-err>
+  </testcase>
+</testsuite>
