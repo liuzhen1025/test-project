@@ -26,8 +26,7 @@ function connect(){
     var userId="1000002";
     var socket = new SockJS('http://127.0.0.1:8080/nmpSocketWeb'); //连接SockJS的endpoint名称为"endpointOyzc"
     stompClient = Stomp.over(socket);//使用STMOP子协议的WebSocket客户端
-    stompClient = Stomp.over(socket);//使用STMOP子协议的WebSocket客户端
-    stompClient.connect({},function(frame){//连接WebSocket服务端
+    stompClient.connect({"oauth":userId},function(frame){//连接WebSocket服务端
         console.log('Connected:' + frame);
         //通过stompClient.subscribe订阅/topic/getResponse 目标(destination)发送的消息
         stompClient.subscribe('/user/' + userId + '/user/getResponse',function(response){
