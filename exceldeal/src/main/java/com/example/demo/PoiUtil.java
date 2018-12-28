@@ -431,6 +431,10 @@ public class PoiUtil {
         InputStream input=new FileInputStream("d:\\workbook-config11.csv");
         org.apache.poi.hssf.usermodel.HSSFWorkbook excelBook=new org.apache.poi.hssf.usermodel.HSSFWorkbook(input);
         ExcelToHtmlConverter excelToHtmlConverter = new ExcelToHtmlConverter (DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument() );
+        /**是否显示行号和header start*/
+        excelToHtmlConverter.setOutputRowNumbers(false);
+        excelToHtmlConverter.setOutputColumnHeaders(false);
+        /**是否显示行号和header end*/
         excelToHtmlConverter.processWorkbook(excelBook);
         List pics = excelBook.getAllPictures();
         if (pics != null) {
