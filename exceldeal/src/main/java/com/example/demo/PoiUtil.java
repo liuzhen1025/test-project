@@ -3,17 +3,26 @@
  */
 package com.example.demo;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.hssf.converter.ExcelToHtmlConverter;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.w3c.dom.Document;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -123,11 +132,13 @@ public class PoiUtil {
         Map<RowKey, Row> hssfRowMap = new HashMap<>();
         int dataStartRow = 0;
         for (HeaderNode node : nodes) {
+            int firstRow = node.getFirstRow();
             if (!(node.firstRow == node.getLastCol())) {
-                CellRangeAddress cra = new CellRangeAddress(node.getFirstRow(), node.getLastRow(),
+                CellRangeAddress cra = new CellRangeAddress(firstRow, node.getLastRow(),
                         node.getFirstCol(), node.getLastCol());
                 sheet.addMergedRegion(cra);
             }
+
             dataStartRow = dataStartRow >= node.getLastRow() ? dataStartRow : node.getLastRow();
             RowKey key = new RowKey();
             key.setFirstRow(node.getFirstRow());
@@ -139,15 +150,16 @@ public class PoiUtil {
             }
             Cell cell = row.createCell(node.getFirstCol());
             cell.setCellValue(node.getName());
-
             cell.setCellStyle(style);
         }
-        /*for (int i =0; i<dataStartRow; i++) {
-            Row row = sheet.getRow(i);
-            for (HeaderNode node : nodes) {
-
+        //添加样式
+        int i1 = nodes == null ? 0 : nodes.size()+1;
+        for(int i = 0; i<=dataStartRow; i++){
+            Row row = sheet.getRow(i) == null? sheet.createRow(i):sheet.getRow(i);
+            for (int j = 0; j<=i1; j++){
+                (row.getCell(j) == null? row.createCell(j):row.getCell(j)).setCellStyle(style);
             }
-        }*/
+        }
         return dataStartRow+1;
     }
 
@@ -157,6 +169,7 @@ public class PoiUtil {
         private int lastRow;
         private int firstCol;
         private int lastCol;
+        private CellStyle cellStyle;
         //水平LEFT,
         //CENTER,
         //RIGHT,
@@ -224,6 +237,16 @@ public class PoiUtil {
 
             this.verticalAlignment = verticalAlignment;
         }
+
+        public CellStyle getCellStyle() {
+
+            return cellStyle;
+        }
+
+        public void setCellStyle(CellStyle cellStyle) {
+
+            this.cellStyle = cellStyle;
+        }
     }
 
     private static class RowKey {
@@ -265,11 +288,43 @@ public class PoiUtil {
         }
     }
 
+    public static HorizontalAlignment getHoAlignment(String horizontalAlignment){
+        HorizontalAlignment result;
+        switch (horizontalAlignment){
+            case "LEFT":
+                result = HorizontalAlignment.CENTER;
+                break;
+            case "RIGHT":
+                result = HorizontalAlignment.CENTER;
+                break;
+            default: result = HorizontalAlignment.CENTER;
+        }
+        return result;
+    }
+    public static VerticalAlignment getVeAlignment(String verticalAlignment){
+        VerticalAlignment result;
+        switch (verticalAlignment){
+            case "TOP":
+                result = VerticalAlignment.CENTER;
+                break;
+            case "BOTTOM":
+                result = VerticalAlignment.CENTER;
+                break;
+            default: result = VerticalAlignment.CENTER;
+        }
+        return result;
+    }
+    /**
+     * [
+     * ]
+     * @param args
+     */
     public static void main(String[] args) {
         // 第一步，创建一个webbook，对应一个Excel文件
-        Workbook workbook = new XSSFWorkbook();
+        Workbook workbook = new HSSFWorkbook();
         // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
         Sheet sheet = workbook.createSheet("测试");
+        Sheet sheet1 = workbook.createSheet("测试2");
         // 第四步，创建单元格，并设置值表头 设置表头居中
         CellStyle style = workbook.createCellStyle();
         // 水平居中格式LEFT,
@@ -280,21 +335,25 @@ public class PoiUtil {
         //CENTER,
          //       BOTTOM,
         style.setVerticalAlignment(VerticalAlignment.CENTER);
+        style.setBorderTop(BorderStyle.THIN);
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setBorderRight(BorderStyle.THIN);
+        style.setBorderBottom(BorderStyle.THIN);
         List<HeaderNode> nodes = new ArrayList<>();
-        HeaderNode headerNode1 = new HeaderNode();
+        /*HeaderNode headerNode1 = new HeaderNode();
+        HeaderNode headerNode34 = new HeaderNode();
         headerNode1.setName("标题");
         headerNode1.setFirstRow(0);
         headerNode1.setLastRow(1);
         headerNode1.setFirstCol(0);
         headerNode1.setLastCol(8);
-        nodes.add(headerNode1);
-        HeaderNode headerNode34 = new HeaderNode();
+        nodes.add(headerNode34);
         headerNode34.setName("建设项目名称");
         headerNode34.setFirstRow(2);
         headerNode34.setLastRow(2);
         headerNode34.setFirstCol(0);
         headerNode34.setLastCol(8);
-        nodes.add(headerNode34);
+        nodes.add(headerNode1);
         HeaderNode headerNode2 = new HeaderNode();
         headerNode2.setName("    ");
         headerNode2.setFirstRow(3);
@@ -309,13 +368,95 @@ public class PoiUtil {
         headerNode3.setFirstCol(1);
         headerNode3.setLastCol(2);
         nodes.add(headerNode3);
+        HeaderNode headerNode4 = new HeaderNode();
+        headerNode4.setName("招标范围1");
+        headerNode4.setFirstRow(3);
+        headerNode4.setLastRow(3);
+        headerNode4.setFirstCol(3);
+        headerNode4.setLastCol(4);
+        nodes.add(headerNode4);
+        HeaderNode headerNode5 = new HeaderNode();
+        headerNode5.setName("招标范围2");
+        headerNode5.setFirstRow(3);
+        headerNode5.setLastRow(3);
+        headerNode5.setFirstCol(5);
+        headerNode5.setLastCol(6);
+        nodes.add(headerNode5);
+        HeaderNode headerNode6 = new HeaderNode();
+        headerNode6.setName("招标范围3");
+        headerNode6.setFirstRow(3);
+        headerNode6.setLastRow(3);
+        headerNode6.setFirstCol(7);
+        headerNode6.setLastCol(8);
+        nodes.add(headerNode6);*/
+        String config = "[\n" +
+                "{\"name\":\"建设项目名称\",\"firstRow\":2,\"lastRow\":2,\"firstCol\":0,\"lastCol\":8,\"horizontalAlignment\":\"LEFT\",\"verticalAlignment\":\"LEFT\"},\n" +
+                "{\"name\":\"标题\",\"firstRow\":0,\"lastRow\":1,\"firstCol\":0,\"lastCol\":8,\"horizontalAlignment\":\"CENTER\",\"verticalAlignment\":\"CENTER\"},\n" +
+                "{\"name\":\"    \",\"firstRow\":3,\"lastRow\":4,\"firstCol\":0,\"lastCol\":0,\"horizontalAlignment\":\"CENTER\",\"verticalAlignment\":\"CENTER\"},\n" +
+                "{\"name\":\"招标范围2\",\"firstRow\":3,\"lastRow\":3,\"firstCol\":5,\"lastCol\":6,\"horizontalAlignment\":\"CENTER\",\"verticalAlignment\":\"CENTER\"},\n" +
+                "{\"name\":\"招标范围2\",\"firstRow\":3,\"lastRow\":3,\"firstCol\":7,\"lastCol\":8,\"horizontalAlignment\":\"CENTER\",\"verticalAlignment\":\"CENTER\"},\n" +
+                "{\"name\":\"招标范围\",\"firstRow\":3,\"lastRow\":3,\"firstCol\":1,\"lastCol\":2,\"horizontalAlignment\":\"CENTER\",\"verticalAlignment\":\"CENTER\"},\n" +
+                "{\"name\":\"招标范围1\",\"firstRow\":3,\"lastRow\":3,\"firstCol\":3,\"lastCol\":4,\"horizontalAlignment\":\"CENTER\",\"verticalAlignment\":\"CENTER\"}\n" +
+                "]";
+        JSONArray array = JSONArray.parseArray(config);
+        int length = array == null ? 0 : array.size();
+        for (int i = 0; i<length; i++){
+            CellStyle st = workbook.createCellStyle();
+            JSONObject jsonObject = array.getJSONObject(i);
+            String horizontalAlignment = jsonObject.getString("horizontalAlignment");
+            String verticalAlignment = jsonObject.getString("verticalAlignment");
+            st.setAlignment(getHoAlignment(horizontalAlignment));
+            st.setVerticalAlignment(getVeAlignment(verticalAlignment));
+            HeaderNode node = JSONObject.toJavaObject(jsonObject, HeaderNode.class);
+            node.setCellStyle(st);
+            nodes.add(node);
+        }
         generateHeader(nodes, sheet, style);
+        generateHeader(nodes, sheet1, style);
         try {
-            FileOutputStream output = new FileOutputStream("d:\\workbook.csv");
+            FileOutputStream output = new FileOutputStream("d:\\workbook-config11.csv");
             workbook.write(output);
             output.flush();
-        } catch (IOException e) {
+            output.close();
+            workbook.close();
+            excelToHtml();
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    final static String path = "D:\\poi-test\\excelToHtml\\";
+    final static String file = "exportExcel.xls";
+    public static void excelToHtml() throws Exception {
+
+        InputStream input=new FileInputStream("d:\\workbook-config11.csv");
+        org.apache.poi.hssf.usermodel.HSSFWorkbook excelBook=new org.apache.poi.hssf.usermodel.HSSFWorkbook(input);
+        ExcelToHtmlConverter excelToHtmlConverter = new ExcelToHtmlConverter (DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument() );
+        excelToHtmlConverter.processWorkbook(excelBook);
+        List pics = excelBook.getAllPictures();
+        if (pics != null) {
+            for (int i = 0; i < pics.size(); i++) {
+                org.apache.poi.hwpf.usermodel.Picture pic = (org.apache.poi.hwpf.usermodel.Picture) pics.get (i);
+                try {
+                    pic.writeImageContent (new FileOutputStream (path + pic.suggestFullFileName() ) );
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        Document htmlDocument =excelToHtmlConverter.getDocument();
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        DOMSource domSource = new DOMSource (htmlDocument);
+        StreamResult streamResult = new StreamResult (outStream);
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer serializer = tf.newTransformer();
+        serializer.setOutputProperty (OutputKeys.ENCODING, "utf-8");
+        serializer.setOutputProperty (OutputKeys.INDENT, "yes");
+        serializer.setOutputProperty (OutputKeys.METHOD, "html");
+        serializer.transform (domSource, streamResult);
+        outStream.close();
+
+        String content = new String (outStream.toByteArray() );
+
+        FileUtils.writeStringToFile(new File(path, "exportExcel.html"), content, "utf-8");
     }
 }
