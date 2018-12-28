@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="referrer" content="never">
+    <title>抖音，记录美好生活!</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="/css/mdb.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/toastr.css" rel="stylesheet">
+    <!-- jquery vue clapper-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
+
+</head>
+
+<body class="creative-lp">
+
+<header>
+
+    <!-- 顶部导航 -->
+    <nav th:replace="~{common :: nav}"></nav>
+
+</header>
+
+<main id="app">
+
+    <div style="padding-top: 70px">
+        <!-- Intro Section -->
+        <div class="view jarallax" data-jarallax='{"speed": 0.2}'
+             style="background-position: top; background-image: url(https://upload-images.jianshu.io/upload_images/3424642-e704c390642f557d.png);">
+            <div class="full-bg-img">
+                <div class="mask rgba-gradient-1">
+                    <div class="container flex-center">
+                        <div class="row pt-5 mt-3">
+                            <div class="col-md-12 wow fadeIn mb-3">
+                                <div class="text-center white-text">
+                                    <!--Section: Team v.1-->
+                                    <section class="text-center team-section">
+                                        <div class="row text-center">
+                                            <div class="col-md-12 mb-4" style="margin-top: -100px;">
+                                                <div class="avatar mx-auto">
+                                                    <img v-bind:src="dy_user.avatar" class="img-fluid rounded-circle z-depth-1" >
+                                                </div>
+                                                <h3 class="my-3 font-weight-bold">
+                                                    <strong v-html="dy_user.nickname"></strong>
+                                                </h3>
+                                                <div>
+                                                    <span class="badge badge-pill light-blue" v-html="dy_user.extraInfo.location"></span>
+                                                    <span class="badge badge-pill orange" v-html="dy_user.extraInfo.constellation"></span>
+                                                </div>
+                                                <hr class="bg-white">
+                                                <h6 class="font-weight-bold mb-3">
+                                                    <i class="fa fa-quote-left"></i>
+                                                    <span v-html="dy_user.signature"></span>
+                                                </h6>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <br>
+
+                                    <div class="col-md-12 mb-4">
+                                        <button class="btn btn-outline-default btn-rounded waves-effect"><i class="fa fa-cube mr-1"></i><span v-html="dy_user.followInfo.focus"></span> 关注</button>
+                                        <button class="btn btn-outline-success btn-rounded waves-effect"><i class="fa fa-user-md mr-1"></i><span v-html="dy_user.followInfo.follower"></span> 粉丝</button>
+                                        <button class="btn btn-outline-danger btn-rounded waves-effect"><i class="fa fa-heart mr-1"></i><span v-html="dy_user.followInfo.likeNum"></span> 喜欢</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/Intro-->
+    </div>
+
+    <!-- /.Main Container -->
+    <div class="container">
+        <div class="row pt-4">
+
+            <!-- Content -->
+            <div class="col-lg-12">
+
+                <!-- Books Grid -->
+                <section class="section pt-4">
+
+                    <!-- Grid row -->
+                    <div class="row">
+
+                        <!--Grid column-->
+                        <div class="col-lg-3 col-md-4 mb-4" v-for="aweme in videoList">
+                            <!--Card-->
+                            <div class="card card-ecommerce">
+
+                                <!--Card image-->
+                                <div class="view overlay" style="max-height: 450px">
+
+                                    <a v-on:click="showVideo(aweme)">
+                                        <img src="https://upload-images.jianshu.io/upload_images/3424642-4fe0ab686ddd76d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+                                             v-bind:data-src="aweme.video.dynamic_cover.url_list[0]"
+                                             class="img-fluid z-depth-1 lazy mx-auto"
+                                             width="270" height="480"/>
+                                    </a>
+
+                                </div>
+                                <!--Card image-->
+
+                                <!-- Card footer -->
+                                <div class="rounded-bottom elegant-color lighten-3 text-center pt-2">
+                                    <ul class="list-unstyled list-inline font-small">
+                                        <li class="list-inline-item px-3 pb-2 white-text float-left"><i
+                                                class="fa fa-heart red-text pr-1"></i><span class="pl-1"
+                                                                                            v-html="aweme.statistics.digg_count"></span>
+                                        </li>
+                                        <li class="list-inline-item px-3 pb-2 white-text float-right"><i
+                                                class="fa fa-share-square blue-text pr-1"> </i><span class="pl-1"
+                                                                                                     v-html="aweme.statistics.forward_count"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <!--Card-->
+
+                        </div>
+                        <!--Grid column-->
+
+                    </div>
+                    <!--Grid row-->
+
+                </section>
+                <!-- /.Products Grid -->
+
+                <!-- 进度条 -->
+                <div class="row mb-5" v-if="loading">
+                    <!--Big blue-->
+                    <div class="preloader-wrapper big active" style="margin: 0 auto">
+                        <div class="spinner-layer spinner-yellow-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.Content -->
+
+        </div>
+    </div>
+    <!-- /.Main Container -->
+
+</main>
+
+
+<!--Modal: 视频播放-->
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+     data-backdrop="false" style="display: none">
+    <div class="modal-dialog pt-4 modal-lg " role="document">
+
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header bg-danger">
+                <h2 class="heading lead text-white">抖音短视频</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body mb-0 pt-3 text-center">
+                <video controls class="d-inline" height=600 width=100% id="videoPlayer">
+                    <source src="" type="video/mp4" poster="" id="videoSource">
+                </video>
+            </div>
+
+            <!--Footer-->
+            <!--<div class="modal-footer justify-content-center">-->
+            <!--<span class="mr-4">Spread the word!</span>-->
+            <!--<a type="button" class="btn-floating btn-sm btn-fb"><i class="fa fa-facebook"></i></a>-->
+            <!--&lt;!&ndash;Twitter&ndash;&gt;-->
+            <!--<a type="button" class="btn-floating btn-sm btn-tw"><i class="fa fa-twitter"></i></a>-->
+            <!--&lt;!&ndash;Google +&ndash;&gt;-->
+            <!--<a type="button" class="btn-floating btn-sm btn-gplus"><i class="fa fa-google-plus"></i></a>-->
+            <!--&lt;!&ndash;Linkedin&ndash;&gt;-->
+            <!--<a type="button" class="btn-floating btn-sm btn-ins"><i class="fa fa-linkedin"></i></a>-->
+            <!--<button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>-->
+            <!--</div>-->
+
+        </div>
+        <!--/.Content-->
+
+    </div>
+</div>
+<!--Modal: Name-->
+
+<!-- 返回顶部 -->
+<section>
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-lg purple-gradient" style="display:none;" id="goTop">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+        </a>
+    </div>
+</section>
+
+<!-- 网站底部 -->
+<footer th:replace="~{common :: footer}"></footer>
+<!-- /网站底部 -->
+
+<!-- JQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
+
+<script th:inline="javascript">
+    //Animation init
+    new WOW().init();
+
+    // 返回顶部
+    $(function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 500) {
+                $("#goTop").fadeIn(200);
+            }
+            else {
+                $("#goTop").hide(200);
+            }
+        });
+        $("#goTop").click(function () {
+            $('html,body').animate({'scrollTop': 0}, 500);
+        });
+
+    });
+
+    /**
+     * 设置
+     */
+    $.ajaxSetup({
+        async: false
+    });
+
+    /**
+     * 定义视图
+     */
+    var app = new Vue({
+        el: "#app",
+        data: {
+            has_more: 1,
+            max_cursor: 0,
+            dy_user: {},
+            loading: false,
+            videoList: []
+        },
+        methods: {
+            showVideo: function (aweme) {
+                var videoSource = $('#videoSource');
+                videoSource.attr("poster", aweme.video.cover.url_list[0]);
+                $('#videoModal').modal('show');
+                videoSource.attr("src", aweme.video.play_addr.url_list[0]);
+                var videoPlayer = document.getElementById('videoPlayer');
+                videoPlayer.loop = true;
+                videoPlayer.load();
+                videoPlayer.play();
+            }
+        }
+    });
+
+    $(function(){
+        loadUser();
+        loadVideos();
+    });
+
+    /**
+     * 加载用户
+     */
+    function loadUser() {
+        var api = "https://service.anoyi.com/douyin/user/" + [[${dyId}]];
+        $.get(api, function (response) {
+            app.dy_user = response;
+        });
+    }
+
+    /**
+     * 加载视频
+     */
+    function loadVideos(){
+        if (app.has_more > 0 && !app.loading){
+            app.loading = true;
+            var api = "https://service.anoyi.com/douyin/videos/" + app.dy_user.id + "/" + app.dy_user.tk + "?cursor=" + app.max_cursor;
+            $.get(api, function (response) {
+                var video_list = response.aweme_list;
+                app.has_more = response.has_more;
+                app.max_cursor = response.max_cursor;
+                for(var i = 0; i < video_list.length; i++){
+                    app.videoList.push(video_list[i]);
+                }
+                app.loading = false;
+            });
+            Vue.nextTick(function () {
+                lazyLoad();
+            })
+        }
+    }
+
+    /**
+     * 懒加载图片
+     */
+    function lazyLoad(){
+        var imgs = document.querySelectorAll('img.lazy');
+        for (var i = 0; i < imgs.length; i++) {
+            imgs[i].src = imgs[i].getAttribute('data-src');
+        }
+    }
+
+    /**
+     *  监听滚动事件
+     */
+    $(window).scroll(function(){
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if(scrollTop + windowHeight > scrollHeight - 100){
+            loadVideos();
+        }
+    });
+
+    /**
+     * 视频弹窗关闭事件
+     */
+    $('#videoModal').on('hidden.bs.modal', function (e) {
+        var videoPlayer = document.getElementById('videoPlayer');
+        videoPlayer.pause();
+    });
+
+
+</script>
+
+</body>
+</html>

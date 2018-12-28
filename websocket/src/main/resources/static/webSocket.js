@@ -3,7 +3,7 @@ var stompClient = null;
 //加载完浏览器后  调用connect（），打开双通道
 $(function(){
     //打开双通道
-    connect()
+   // connect()
 })
 //强制关闭浏览器  调用websocket.close（）,进行正常关闭
 window.onunload = function() {
@@ -27,13 +27,43 @@ function connect(){
     var socket = new SockJS('http://127.0.0.1:8080/nmpSocketWeb'); //连接SockJS的endpoint名称为"endpointOyzc"
     stompClient = Stomp.over(socket);//使用STMOP子协议的WebSocket客户端
     stompClient.connect({"oauth":userId},function(frame){//连接WebSocket服务端
-        console.log('Connected:' + frame);
+        //console.log('Connected:' + frame);
         //通过stompClient.subscribe订阅/topic/getResponse 目标(destination)发送的消息
         stompClient.subscribe('/user/' + userId + '/user/getResponse',function(response){
             var code=JSON.parse(response.body);
             showResponse(code)
         });
     });
+}
+
+function connectionAuto() {
+    if(stompClient != null) {
+        //stompClient.disconnect();
+        console.log("已有链接，断开后重连");
+        $("#response").html('')
+    }
+    var userId = $("#userId").val();
+    alert(userId)
+    var socket = new SockJS('http://127.0.0.1:8080/nmpSocketWeb'); //连接SockJS的endpoint名称为"endpointOyzc"
+    stompClient = Stomp.over(socket);//使用STMOP子协议的WebSocket客户端
+    stompClient.connect({"oauth":userId},function(frame){//连接WebSocket服务端
+        //console.log('Connected:' + frame);
+        //通过stompClient.subscribe订阅/topic/getResponse 目标(destination)发送的消息
+        stompClient.subscribe('/user/' + userId + '/user/qqqq/dd/ddd',function(response){
+            var code=JSON.parse(response.body);
+            console.log(response.headers)
+            showResponse(code)
+        });
+    });
+}
+
+function sendMessage() {
+    var send_message = $("#send_message").val();
+    var userId = $("#userId").val();
+    $.post("http://127.0.0.1:8080/socket/meaage",{"id":userId,"message":send_message},function (data) {
+        alert(data)
+    })
+    //stompClient.send("http://127.0.0.1:8080/socket/meaage",{"userId":userId,"sendMessage":send_message},send_message);
 }
 
 //关闭双通道
@@ -45,5 +75,5 @@ function disconnect(){
 }
 function showResponse(message) {
     var response = $("#response");
-    response.append("<p>" + message.userName + "</p>");
+    response.append("<p>" + message.message + "</p>");
 }

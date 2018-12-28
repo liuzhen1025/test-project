@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>抖音 - 排行榜</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="/css/mdb.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/toastr.css" rel="stylesheet">
+</head>
+
+<body class="creative-lp">
+
+<header>
+
+    <!-- 顶部导航 -->
+    <nav th:replace="~{common :: nav}"></nav>
+
+</header>
+
+<div style="padding-top: 70px">
+    <!-- Intro Section -->
+    <div class="view jarallax" data-jarallax='{"speed": 0.2}'
+         style="background-position: top; background-image: url(https://upload-images.jianshu.io/upload_images/3424642-d55038c310ffef8d.png);">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-light">
+                <div class="container flex-center">
+                    <div class="row pt-5 mt-3">
+                        <div class="col-md-12 wow fadeIn mb-3">
+                            <div class="text-center white-text">
+                                <ul class="list-unstyled ">
+                                    <li>
+                                        <h4 class="display-4 mt-md-5 mt-md-0 mb-5 font-weight-bold white-text wow fadeIn"
+                                            data-wow-delay="0.3s">
+                                            <strong>抖音排行榜，记录美好生活！</strong>
+                                        </h4>
+                                        <hr class="hr-light wow fadeInLeft animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInLeft; animation-delay: 0.3s;">
+                                        <h6 class="wow fadeInLeft animated" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInLeft; animation-delay: 0.3s;">
+                                            私人抖音账号定制，请联系作者！
+                                        </h6>
+                                    </li>
+                                    <li class="wow fadeIn pt-4" data-wow-delay="0.4s">
+                                        <a class="btn pink-gradient btn-rounded btn-lg font-weight-bold"  data-toggle="modal" data-target="#rewardModal">支持作者</a>
+                                        <a class="btn pink-gradient btn-rounded btn-lg font-weight-bold" href="/#contract">私人定制</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/Intro-->
+</div>
+
+<!-- /.Main Container -->
+<div class="container">
+    <div class="row pt-4">
+
+        <!-- Content -->
+        <div class="col-lg-12">
+
+            <!-- Books Grid -->
+            <section class="section pt-4">
+
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-6 mb-4" th:each="user : ${users}">
+                        <div class="card testimonial-card mb-4">
+
+                            <!--Bacground color-->
+                            <div class="card-up peach-gradient">
+                            </div>
+
+                            <!--Avatar-->
+                            <div class="avatar mx-auto white">
+                                <a th:href="'/dy/' + ${user.id}">
+                                    <img th:src="${user.avatar}" class="rounded-circle">
+                                </a>
+                            </div>
+
+                            <div class="card-body">
+                                <!--Name-->
+                                <a th:href="'/dy/' + ${user.id}"><h4 class="card-title" th:text="${user.nickname}"></h4></a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+            <!-- /.Products Grid -->
+
+        </div>
+        <!-- /.Content -->
+
+    </div>
+</div>
+<!-- /.Main Container -->
+
+<!-- 打赏 -->
+<div class="modal fade right" id="rewardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">支持作者</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+
+                    <div class="row">
+                        <div class="col-md-6" th:each="rewardImage : ${custom.rewardImages}">
+                            <div class="justify-content-center mb-3" >
+                                <img th:src="${rewardImage}" class="img-fluid rounded z-depth-1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <kbd th:text="${custom.rewardDesc}"></kbd>
+                    </div>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">残忍离开</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+
+</div>
+
+<!-- 返回顶部 -->
+<section >
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-lg purple-gradient" style="display:none;" id="goTop">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+        </a>
+    </div>
+</section>
+
+<!-- 网站底部 -->
+<footer th:replace="~{common :: footer}"></footer>
+<!-- /网站底部 -->
+
+<!-- JQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    //Animation init
+    new WOW().init();
+
+    // 返回顶部
+    $(function(){
+        $(window).scroll(function(){
+            if($(window).scrollTop() > 500){
+                $("#goTop").fadeIn(200);
+            }
+            else{
+                $("#goTop").hide(200);
+            }
+        });
+        $("#goTop").click(function(){
+            $('html,body').animate({'scrollTop': 0 }, 500);
+        });
+    });
+
+</script>
+
+</body>
+</html>

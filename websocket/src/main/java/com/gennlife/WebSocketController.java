@@ -9,6 +9,8 @@ import org.springframework.messaging.core.MessagePostProcessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author liuzhen
@@ -18,10 +20,11 @@ import org.springframework.stereotype.Controller;
  */
 
 @Controller
+@RequestMapping("/socket")
 public class WebSocketController {
     @Autowired
     private SimpMessagingTemplate template;
-    @Scheduled(fixedRate = 1000)
+    //@Scheduled(fixedRate = 1000)
     public void sendTopicMessage() {
         System.out.println("后台广播推送！");
         User user=new User();
@@ -31,19 +34,23 @@ public class WebSocketController {
         this.template.convertAndSend("/topic/getResponse",user);
     }
     //一对一推送消息
-    @Scheduled(fixedRate = 1000)
+    //@Scheduled(fixedRate = 1000)
     public void sendQueueMessage() {
         System.out.println("后台一对一推送！");
         User user=new User();
         user.setId("1000002");
         user.setUserName("后台点对点");
         user.setAge(10);
-        /*template.convertAndSendToUser(user.getId() + "", "/user/getResponse", user, new MessagePostProcessor() {
-            @Override
-            public Message<?> postProcessMessage(Message<?> message) {
-                return null;
-            }
-        });*/
         this.template.convertAndSendToUser(user.getId()+"","/user/getResponse",user);
+    }
+    @RequestMapping("/meaage")
+    @ResponseBody
+    public String receivedMesssage(User user){
+        /*User user=new User();
+        user.setId(userId);
+        user.setUserName(sendMessage);
+        user.setAge(10);*/
+        this.template.convertAndSendToUser(user.getId()+"","/user/qqqq/dd/ddd",user);
+        return "success";
     }
 }

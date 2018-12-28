@@ -13,6 +13,17 @@ public class User {
     private String userName;
     private String id;
     private Integer age;
+    private Object message;
+
+    public Object getMessage() {
+
+        return message;
+    }
+
+    public void setMessage(Object message) {
+
+        this.message = message;
+    }
 
     public String getUserName() {
 

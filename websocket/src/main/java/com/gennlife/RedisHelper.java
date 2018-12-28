@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * Date: 2018/11/26
  * Time: 10:14
  */
-@Component
+//@Component
 public class RedisHelper {
     private static Config config ;
     private static RedissonClient redisson;

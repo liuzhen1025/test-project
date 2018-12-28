@@ -14,8 +14,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 @EnableWebSocket
 @EnableScheduling
 public class WebsocketApplication {
-	@Autowired
-	private SimpMessagingTemplate template;
+	/**https://gitee.com/anoyi/anyim*/
 	public static void main(String[] args) {
 		SpringApplication.run(WebsocketApplication.class, args);
 
