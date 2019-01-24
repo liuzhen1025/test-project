@@ -4,9 +4,14 @@
 package com.gennlife;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.web.socket.messaging.SessionConnectEvent;
+
+import java.util.List;
 
 /**
  * @author liuzhen
@@ -16,16 +21,20 @@ import org.springframework.web.socket.messaging.SessionConnectEvent;
  */
 public class STOMPConnectEventListener implements ApplicationListener<SessionConnectEvent> {
     @Autowired
-    private RedisHelper redisHelper;
+    private ApplicationContext context;
     @Override
     public void onApplicationEvent(SessionConnectEvent sessionConnectEvent) {
         StompHeaderAccessor sha = StompHeaderAccessor.wrap(sessionConnectEvent.getMessage());
         //login get from browser
-        if(sha.getNativeHeader("userid")==null){
+        List<String> oauth = sha.getNativeHeader("oauth");
+        StompCommand command = sha.getCommand();
+        if(oauth == null || oauth.isEmpty() || command == null){
             return;
         }
-        String userid = sha.getNativeHeader("userid").get(0);
-        String sessionId = sha.getSessionId();
-        redisHelper.put("sessionKey", "websocket:"+userid,sessionId);
+        String name = command.getMessageType().name();
+        String id = oauth.get(0);
+        MessageEvent event = new MessageEvent(this);
+        event.setEventContent(id);
+        context.publishEvent(event);
     }
 }

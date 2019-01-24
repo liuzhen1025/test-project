@@ -4,6 +4,7 @@
 package com.gennlife;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
@@ -35,10 +36,10 @@ import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
     //STOMP监听类
-    /*@Bean
+    @Bean
     public STOMPConnectEventListener applicationStartListener(){
         return new STOMPConnectEventListener();
-    }*/
+    }
     @Override
     public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
         //建立连接端点，注册一个STOMP的协议节点,并指定使用SockJS协议
