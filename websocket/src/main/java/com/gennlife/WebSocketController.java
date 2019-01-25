@@ -6,11 +6,14 @@ package com.gennlife;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.core.MessagePostProcessor;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.websocket.server.ServerEndpoint;
 
 /**
  * @author liuzhen
@@ -50,6 +53,12 @@ public class WebSocketController {
         user.setId(userId);
         user.setUserName(sendMessage);
         user.setAge(10);*/
+        this.template.convertAndSendToUser(user.getId()+"","/user/qqqq/dd/ddd",user);
+        return "success";
+    }
+    @MessageMapping("/test")
+    @ResponseBody
+    public String received(User user){
         this.template.convertAndSendToUser(user.getId()+"","/user/qqqq/dd/ddd",user);
         return "success";
     }

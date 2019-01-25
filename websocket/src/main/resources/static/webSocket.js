@@ -60,10 +60,10 @@ function connectionAuto() {
 function sendMessage() {
     var send_message = $("#send_message").val();
     var userId = $("#userId").val();
-    $.post("http://127.0.0.1:8080/socket/meaage",{"id":userId,"message":send_message},function (data) {
+    /*$.post("http://127.0.0.1:8080/socket/meaage",{"id":userId,"message":send_message},function (data) {
         alert(data)
-    })
-    //stompClient.send("http://127.0.0.1:8080/socket/meaage",{"userId":userId,"sendMessage":send_message},send_message);
+    })*/
+    stompClient.send("/user/test",{},JSON.stringify({"id":userId,"message":send_message}));
 }
 
 //关闭双通道
