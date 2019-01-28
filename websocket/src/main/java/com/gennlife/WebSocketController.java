@@ -57,6 +57,12 @@ public class WebSocketController {
         this.template.convertAndSendToUser(user.getId()+"","/user/qqqq/dd/ddd",user);
         return "success";
     }
+
+    /**
+     * 必须有{userId} web端推送消息时，服务端收到消息才不会报错
+     * @param user
+     * @return
+     */
     @MessageMapping("/{userId}/test")
     @ResponseBody
     public String received(User user){
