@@ -36,7 +36,7 @@ public class ContainerEventListener implements BeanNameAware {
         user.setUserName("登陆了");
         user.setMessage("用户 【"+id+"】登陆了");
         user.setAge(10);
-        this.template.convertAndSendToUser(user.getId()+"","/user/qqqq/dd/ddd",user);
+        this.template.convertAndSendToUser(user.getId()+"","/qqqq/dd/ddd",user);
 
     }
 

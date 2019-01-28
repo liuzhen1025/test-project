@@ -10,6 +10,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -56,10 +57,10 @@ public class WebSocketController {
         this.template.convertAndSendToUser(user.getId()+"","/user/qqqq/dd/ddd",user);
         return "success";
     }
-    @MessageMapping("/test")
+    @MessageMapping("/{userId}/test")
     @ResponseBody
     public String received(User user){
-        this.template.convertAndSendToUser(user.getId()+"","/user/qqqq/dd/ddd",user);
+        this.template.convertAndSendToUser(user.getId(),"/qqqq/dd/ddd",user);
         return "success";
     }
 }

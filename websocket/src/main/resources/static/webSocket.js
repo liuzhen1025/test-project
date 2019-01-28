@@ -49,7 +49,7 @@ function connectionAuto() {
         console.log("fram "+frame)
         //console.log('Connected:' + frame);
         //通过stompClient.subscribe订阅/topic/getResponse 目标(destination)发送的消息
-        stompClient.subscribe('/user/' + userId + '/user/qqqq/dd/ddd',function(response){
+        stompClient.subscribe('/user/' + userId + '/qqqq/dd/ddd',function(response){
             var code=JSON.parse(response.body);
             console.log(response.headers)
             showResponse(code)
@@ -63,7 +63,7 @@ function sendMessage() {
     /*$.post("http://127.0.0.1:8080/socket/meaage",{"id":userId,"message":send_message},function (data) {
         alert(data)
     })*/
-    stompClient.send("/user/test",{},JSON.stringify({"id":userId,"message":send_message}));
+    stompClient.send("/user/"+ userId+"/test",{},JSON.stringify({"id":userId,"message":send_message}));
 }
 
 //关闭双通道
