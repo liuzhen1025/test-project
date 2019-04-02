@@ -11,6 +11,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageType;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.support.MessageHeaderInitializer;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.websocket.server.ServerEndpoint;
+import java.security.Principal;
 
 /**
  * @author liuzhen
@@ -68,7 +70,8 @@ public class WebSocketController {
      */
     @MessageMapping("/{userId}/test")
     @ResponseBody
-    public String received(User user){
+    public String received(@PathVariable String userId, User user,MessageHeaders headers){
+        SimpMessageHeaderAccessor headerAccessor = SimpMessageHeaderAccessor.create(SimpMessageType.MESSAGE);
         this.template.convertAndSendToUser(user.getId(),"/qqqq/dd/ddd",user);
         return "success";
     }

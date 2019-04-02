@@ -63,7 +63,13 @@ function sendMessage() {
     /*$.post("http://127.0.0.1:8080/socket/meaage",{"id":userId,"message":send_message},function (data) {
         alert(data)
     })*/
-    stompClient.send("/user/"+ userId+"/test",{},JSON.stringify({"id":userId,"message":send_message}));
+    var headers = {
+        login: 'mylogin',
+        passcode: 'mypasscode',
+        // additional header
+        'client-id': userId
+    };
+    stompClient.send("/user/"+ userId+"/test",headers,JSON.stringify({"id":userId,"message":send_message}));
 }
 
 //关闭双通道
