@@ -49,6 +49,6 @@ public class MapReader {
         Supplier<MapReader> c1 = MapReader::new;
         MapReader mapReader = c1.get();
         mapReader.readerMapForRefCons(map,System.out::println);
-        Comparator::comparing("")
+        //Comparator::comparing("")
     }
 }
