@@ -3,10 +3,10 @@
  */
 package com.lz.lz.response.body.advise;
 
-import com.gennlife.platform.model.UIConfig;
 import com.gennlife.platform.util.JsonUtils;
 import com.google.gson.JsonObject;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 用于修改controller层返回的数据，需要webConfig类的配合
  * @author liuzhen
  * Created by liuzhen.
  * Date: 2019/3/25
@@ -30,8 +31,8 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class ResponseBodyAdvices implements ResponseBodyAdvice<Object> {
     private static int CONFIGSTATUS = 1;
-    /*@Autowired
-    private UIConfigService uiConfigService;*/
+    @Autowired
+    private UIConfigService uiConfigService;
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
 
