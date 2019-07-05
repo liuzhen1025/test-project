@@ -8,11 +8,9 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
   <sql id="Base_Column_List">
-    <!--@mbg.generated generated on Thu Jul 04 09:20:17 CST 2019.-->
     order_item_id, order_id, `name`
   </sql>
   <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated generated on Thu Jul 04 09:20:17 CST 2019.-->
     update t_order_item0
     <trim prefix="set" suffixOverrides=",">
       <trim prefix="order_id = case" suffix="end,">
@@ -32,7 +30,6 @@
     </foreach>
   </update>
   <insert id="batchInsert" parameterType="map">
-    <!--@mbg.generated generated on Thu Jul 04 09:20:17 CST 2019.-->
     insert into t_order_item0
     (order_item_id, order_id, `name`)
     values
@@ -42,7 +39,6 @@
     </foreach>
   </insert>
   <insert id="insertOrUpdate" parameterType="com.gennlife.domain.TOrderItem0">
-    <!--@mbg.generated generated on Thu Jul 04 09:20:17 CST 2019.-->
     insert into t_order_item0
     (order_item_id, order_id, `name`)
     values
@@ -54,7 +50,6 @@
     `name` = #{name,jdbcType=VARCHAR}
   </insert>
   <insert id="insertOrUpdateSelective" parameterType="com.gennlife.domain.TOrderItem0">
-    <!--@mbg.generated generated on Thu Jul 04 09:20:17 CST 2019.-->
     insert into t_order_item0
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderItemId != null">
