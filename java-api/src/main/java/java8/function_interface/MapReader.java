@@ -12,12 +12,14 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 /**
+ * C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;D:\Program Files\Git\cmd;C:\Users\liuzhen278\AppData\Local\Microsoft\WindowsApps
  * @author liuzhen
  * Created by liuzhen.
  * Date: 2019/3/29
  * Time: 16:17
  */
 public class MapReader {
+
     public static void readerMap(Map<String,String> map, ProcessMapReader reader){
 
         Set<String> keySet = map.keySet();

@@ -148,4 +148,8 @@ public class XJsonPath {
         return expressions;
     }
 
+    public static void main(String[] args) {
+        System.out.println("---------------------");
+    }
+
 }

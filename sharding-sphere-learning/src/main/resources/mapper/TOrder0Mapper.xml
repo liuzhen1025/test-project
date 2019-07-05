@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gennlife.dao.TOrder0Mapper">
+  <resultMap id="BaseResultMap" type="com.gennlife.domain.TOrder0">
+    <!--@mbg.generated-->
+    <id column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    order_id, user_id, goods_name
+  </sql>
+  <!--<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </select>-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
+    delete from t_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </delete>-->
+  <!--<insert id="insert" parameterType="com.gennlife.domain.TOrder0">
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
+    insert into t_order (order_id, user_id, goods_name
+      )
+    values (#{orderId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}
+      )
+  </insert>-->
+  <!--<insert id="insertSelective" parameterType="com.gennlife.domain.TOrder0">
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>-->
+  <!--<update id="updateByPrimaryKeySelective" parameterType="com.gennlife.domain.TOrder0">
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
+    update t_order
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>-->
+  <!--<update id="updateByPrimaryKey" parameterType="com.gennlife.domain.TOrder0">
+    &lt;!&ndash;@mbg.generated&ndash;&gt;
+    update t_order
+    set user_id = #{userId,jdbcType=BIGINT},
+      goods_name = #{goodsName,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>-->
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update t_order
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when order_id = #{item.orderId,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="goods_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when order_id = #{item.orderId,jdbcType=BIGINT} then #{item.goodsName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where order_id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.orderId,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into t_order
+    (order_id, user_id, goods_name)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.orderId,jdbcType=BIGINT}, #{item.userId,jdbcType=BIGINT}, #{item.goodsName,jdbcType=VARCHAR}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="com.gennlife.domain.TOrder0">
+    <!--@mbg.generated-->
+    insert into t_order
+    (order_id, user_id, goods_name)
+    values
+    (#{orderId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}
+      )
+    on duplicate key update 
+    order_id = #{orderId,jdbcType=BIGINT}, 
+    user_id = #{userId,jdbcType=BIGINT}, 
+    goods_name = #{goodsName,jdbcType=VARCHAR}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="com.gennlife.domain.TOrder0">
+    <!--@mbg.generated-->
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

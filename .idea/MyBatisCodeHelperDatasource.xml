@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MyBatisCodeHelperDatasource">
+    <option name="projectProfile">
+      <ProjectProfile>
+        <option name="addSerializeUid" value="true" />
+        <option name="batchInsert" value="true" />
+        <option name="generateService" value="true" />
+        <option name="generateServiceInterface" value="true" />
+        <option name="insertOnDuplicateKey" value="true" />
+        <option name="javaMapperPackage" value="com.gennlife.dao" />
+        <option name="javaMapperPath" value="$PROJECT_DIR$/sharding-sphere-learning/src/main/java" />
+        <option name="javaModelPackage" value="com.gennlife.domain" />
+        <option name="javaModelPath" value="$PROJECT_DIR$/sharding-sphere-learning/src/main/java" />
+        <option name="lastDatabaseCrudChooseModuleName" value="shardingspherelearning" />
+        <option name="mapperSuperClass" value="com.base.IBaseMapper" />
+        <option name="modelAddEqualHashCode" value="true" />
+        <option name="modelAddToString" value="true" />
+        <option name="moduleNameToPackageAndPathMap">
+          <map>
+            <entry key="shardingspherelearning">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="com.gennlife.dao" />
+                  <option name="javaMapperPath" value="$PROJECT_DIR$/sharding-sphere-learning/src/main/java" />
+                  <option name="javaModelPacakge" value="com.gennlife.domain" />
+                  <option name="javaModelPath" value="$PROJECT_DIR$/sharding-sphere-learning/src/main/java" />
+                  <option name="javaServiceInterfacePackage" value="com.gennlife.service" />
+                  <option name="javaServiceInterfacePath" value="$PROJECT_DIR$/sharding-sphere-learning/src/main/java" />
+                  <option name="javaServicePackage" value="com.gennlife.service.impl" />
+                  <option name="javaServicePath" value="$PROJECT_DIR$/sharding-sphere-learning/src/main/java" />
+                  <option name="xmlPackage" value="mapper" />
+                  <option name="xmlPath" value="$PROJECT_DIR$/sharding-sphere-learning/src/main/resources" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="tableGenerateConfigs">
+          <map>
+            <entry key="ds0:t_order0">
+              <value>
+                <TableGenerateConfig>
+                  <option name="batchInsert" value="true" />
+                  <option name="generatedKey" value="" />
+                  <option name="insertOnDuplicateKey" value="true" />
+                  <option name="javaModelName" value="TOrder0" />
+                  <option name="moduleName" value="shardingspherelearning" />
+                  <option name="updateBatch" value="true" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="ds0:t_order_item0">
+              <value>
+                <TableGenerateConfig>
+                  <option name="batchInsert" value="true" />
+                  <option name="generatedKey" value="" />
+                  <option name="insertOnDuplicateKey" value="true" />
+                  <option name="javaModelName" value="TOrderItem0" />
+                  <option name="moduleName" value="shardingspherelearning" />
+                  <option name="updateBatch" value="true" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="updateBatch" value="true" />
+        <option name="useCommonMapper" value="true" />
+        <option name="xmlMapperPackage" value="mapper" />
+        <option name="xmlMapperPath" value="$PROJECT_DIR$/sharding-sphere-learning/src/main/resources" />
+      </ProjectProfile>
+    </option>
+  </component>
+</project>

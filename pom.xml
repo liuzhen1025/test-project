@@ -8,6 +8,10 @@
         <module>desinger-pattern-master-worker</module>
         <module>jsonpathstudy</module>
         <module>cacheredisson</module>
+        <module>JavaInvocation</module>
+        <module>sharding-sphere-learning</module>
+        <module>diary</module>
+        <module>leetcode</module>
     </modules>
     <groupId>com.gennlife</groupId>
     <artifactId>mytest-project</artifactId>
