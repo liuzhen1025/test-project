@@ -12,6 +12,7 @@ import org.springframework.transaction.TransactionStatus;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,51 +30,58 @@ public class App
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         TOrder0Service orderService = (TOrder0Service)context.getBean("order0Service");
-        JdbcTemplate jdbcTemplate = (JdbcTemplate)context.getBean("jdbcTemplate");
-
-        /*for (long i = 1000000; i<2000000; i=i+2) {
+        final JdbcTemplate jdbcTemplate = (JdbcTemplate)context.getBean("jdbcTemplate");
+        List<TOrder0> lists = new ArrayList<>(20);
+        /*for (long i = 2000151; i<2000191; i++) {
             TOrder0 order0 = new TOrder0();
             order0.setGoodsName("测试"+i);
             order0.setOrderId(i);
-            order0.setUserId(13L);
-           *//* order0.setPageNum(0);
-            order0.setPageSize(0);*//*
-            //order0.setOrderBy("order_id desc");
-            orderService.insertSelective(order0);
-            System.out.println("已处理："+i);
-        }*/
-        TOrder0 order0 = new TOrder0();
+            order0.setUserId(i);
+            lists.add(order0);
+        }
+        int i = orderService.batchInsert(lists);
+        System.out.println(i);*/
+        /**/TOrder0 order0 = new TOrder0();
         order0.setUserId(13L);
         order0.setPageNum(5);
         order0.setPageSize(10);
-        order0.setOrderBy("order_id desc");
+        order0.setOrderBy("user_id desc,order_id asc");
+
         //orderService.insert(order0);
         //orderService.updateByPrimaryKey(order0);
         /*Map<String,Object> ob = new HashMap<>();
         ob.put("goodsName","测试111");*/
         //PageHelper.startPage(1,2,true);
         //List<TOrder0> tOrder0s = orderService.selectCountByConditionOr(order0);
-        jdbcTemplate.queryForObject("select count(1) from t_order",Long.class);
-
-        /*for (int i = 0; i<=10; i++) {
-            long start = System.currentTimeMillis();
-            jdbcTemplate.queryForObject("select count(1) from t_order",Long.class);
-            int page = i*10;
-            List<Map<String, Object>> maps = jdbcTemplate.queryForList("select * from t_order order by order_id desc limit "+page+",10 ");
-            System.out.println("普通用时："+(System.currentTimeMillis()-start));
+        //jdbcTemplate.queryForObject("select count(1) from t_order",Long.class);
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                long start = System.currentTimeMillis();
+                for (int i = 0; i<=200; i++) {
+                    jdbcTemplate.queryForObject("select count(1) from t_order",Long.class);
+                    int page = i*10;
+                    List<Map<String, Object>> maps = jdbcTemplate.queryForList("select * from t_order where order_id=13 order by order_id desc limit "+page+",10 ");
+                }
+                System.out.println("普通用时："+(System.currentTimeMillis()-start));
+            }
+        });
+        executorService.shutdown();
+        /*long l = System.currentTimeMillis();
+        for (int i = 0; i<=200; i++) {
             order0.setPageNum(i+11);
-            long l = System.currentTimeMillis();
             List<TOrder0> select = orderService.select(order0);
             *//*List<TOrder0> tOrder0s = orderService.selectByCondition(example);*//*
             PageInfo<TOrder0> pageInfo1 = orderService.convertToPage(select);
-            System.out.println("用时："+(System.currentTimeMillis()-l));
-        }*/
-        long l = System.currentTimeMillis();
+        }
+        System.out.println("用时："+(System.currentTimeMillis()-l));*/
+        /**//*long l = System.currentTimeMillis();
         List<TOrder0> select = orderService.select(order0);
-        /*List<TOrder0> tOrder0s = orderService.selectByCondition(example);*/
+        *//*List<TOrder0> tOrder0s = orderService.selectByCondition(example);*//*
         System.out.println("================================================================");
         PageInfo<TOrder0> pageInfo1 = orderService.convertToPage(select);
-        System.out.println("用时："+(System.currentTimeMillis()-l));
+        System.out.println("用时："+(System.currentTimeMillis()-l));*/
         //System.out.println(pageInfo1);
         //orderService.selectAll();
         /*List<TOrder0> select = orderService.select(pa);

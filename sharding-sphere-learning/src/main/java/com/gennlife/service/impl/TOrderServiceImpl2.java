@@ -6,6 +6,8 @@ import com.gennlife.domain.TOrder0;
 import com.gennlife.service.TOrder0Service;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author liuzhen278
  * @title: TOrderServiceImpl2
@@ -19,6 +21,16 @@ public class TOrderServiceImpl2 extends BaseServiceImpl<TOrder0> implements TOrd
     public TOrderServiceImpl2(TOrder0Mapper tOrder0Mapper) {
         super(tOrder0Mapper);
         this.tOrder0Mapper = tOrder0Mapper;
+    }
+
+    @Override
+    public int batchInsert(List<TOrder0> list) {
+        return tOrder0Mapper.batchInsert(list);
+    }
+
+    @Override
+    public List<TOrder0> selectById(String id) {
+        return tOrder0Mapper.selectById(id);
     }
 
 }

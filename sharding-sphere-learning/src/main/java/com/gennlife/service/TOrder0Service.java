@@ -1,6 +1,8 @@
 package com.gennlife.service;
 
 import com.gennlife.domain.TOrder0;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -11,8 +13,8 @@ import java.util.List;
  * @date 2019/7/319:21
  */
 public interface TOrder0Service extends BaseService<TOrder0> {
-
-
+    int batchInsert(List<TOrder0> list);
+    List<TOrder0> selectById(String id);
     /*int deleteByPrimaryKey(Long orderId);
 
     int insert(TOrder0 record);
