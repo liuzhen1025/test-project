@@ -20,6 +20,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
+ * 腾讯内容安全接口封装框架 https://gitee.com/xshuai/taip
  * Hello world!
  *
  */
@@ -46,7 +47,11 @@ public class App
         order0.setPageNum(5);
         order0.setPageSize(10);
         order0.setOrderBy("user_id desc,order_id asc");
-
+        //List<TOrder0> select = orderService.select(order0);
+        long start = System.currentTimeMillis();
+        List<TOrder0> tOrder0s = orderService.select(order0);
+        List<TOrder0> tOrder0s1 = orderService.select(order0);
+        System.out.println();
         //orderService.insert(order0);
         //orderService.updateByPrimaryKey(order0);
         /*Map<String,Object> ob = new HashMap<>();
@@ -54,7 +59,7 @@ public class App
         //PageHelper.startPage(1,2,true);
         //List<TOrder0> tOrder0s = orderService.selectCountByConditionOr(order0);
         //jdbcTemplate.queryForObject("select count(1) from t_order",Long.class);
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
+       /* ExecutorService executorService = Executors.newFixedThreadPool(2);
         executorService.submit(new Runnable() {
             @Override
             public void run() {
@@ -67,7 +72,7 @@ public class App
                 System.out.println("普通用时："+(System.currentTimeMillis()-start));
             }
         });
-        executorService.shutdown();
+        executorService.shutdown();*/
         /*long l = System.currentTimeMillis();
         for (int i = 0; i<=200; i++) {
             order0.setPageNum(i+11);

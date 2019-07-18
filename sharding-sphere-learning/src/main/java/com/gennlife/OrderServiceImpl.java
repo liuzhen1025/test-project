@@ -1,5 +1,6 @@
 package com.gennlife;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(rollbackFor = RuntimeException.class)
 public class OrderServiceImpl implements OrderService {
+    @Autowired
     private JdbcTemplate jdbcTemplate;
     @Override
     public void insert(String sql) {

@@ -4,16 +4,12 @@ import com.IBaseMapper;
 import com.gennlife.annotation.EnablePage;
 import com.gennlife.domain.BaseEntity;
 import com.gennlife.service.BaseService;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -280,7 +276,6 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         return baseMapper.selectCount(t);
     }
 
-    @EnablePage
     @Override
     public List<T> select(T t) {
         List<T> select = baseMapper.select(t);
@@ -304,7 +299,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     @Override
     public PageInfo<T> convertToPage(List<T> object) {
-        return new PageInfo<>(object);
+        return new PageInfo<>(object==null? new ArrayList<T>():object);
     }
     @EnablePage
     @Override
@@ -314,4 +309,24 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         criteria.orEqualTo(t);
         return this.selectByCondition(example);
     }
+    @EnablePage
+    @Override
+    public PageInfo<T> selectByEntityWithPage(T t) {
+        List<T> list = this.select(t);
+        //PageInfo<T> pageInfo = new PageInfo<>(select==null? new ArrayList<T>():select);
+        return this.convertToPage(list);
+    }
+    @EnablePage
+    @Override
+    public PageInfo<T> selectByExampleWithPage(T t) {
+        List<T> ts = this.selectByExample(t);
+        return this.convertToPage(ts);
+    }
+    @EnablePage
+    @Override
+    public PageInfo<T> selectByConditonWithPage(T t) {
+        List<T> ts = this.selectByCondition(t);
+        return this.convertToPage(ts);
+    }
+
 }

@@ -11,6 +11,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -27,11 +29,12 @@ import java.util.List;
 @Aspect
 @Component
 public class EnablePageIntercepter {
-    @Pointcut("@annotation(com.gennlife.annotation.EnablePage)")
+    private static Logger LOG = LoggerFactory.getLogger(EnablePageIntercepter.class);
+    /*@Pointcut("@annotation(com.gennlife.annotation.EnablePage)")
     public void enablePage() {
-    }
-    @Before("enablePage()")
-    public void doPage(JoinPoint joinPoint){
+    }*/
+    @Before("@annotation(enablePage)")
+    public void doPage(JoinPoint joinPoint, EnablePage enablePage){
         Object[] args = joinPoint.getArgs();
         try {
             int pageNum;
@@ -47,7 +50,6 @@ public class EnablePageIntercepter {
                 PageHelper.orderBy(orderBy);
             }
         } catch (Throwable e) {
-            e.printStackTrace();
         } finally {
         }
     }

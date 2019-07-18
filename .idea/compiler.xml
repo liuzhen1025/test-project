@@ -11,9 +11,11 @@
         <module name="shardingspherelearning" />
         <module name="json-path-study" />
         <module name="leetcode" />
-        <module name="diary" />
         <module name="desinger-pattern-master-worker" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="diary" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

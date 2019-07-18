@@ -15,5 +15,8 @@ import java.util.List;
  */
 public interface BaseService<T> extends IBaseMapper<T> {
     public PageInfo<T> convertToPage(List<T> object);
+    public PageInfo<T> selectByEntityWithPage(T t);
+    public PageInfo<T> selectByExampleWithPage(T t);
+    public PageInfo<T> selectByConditonWithPage(T t);
     public List<T> selectCountByConditionOr(BaseEntity t);
 }

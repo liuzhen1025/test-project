@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface TOrder0Service extends BaseService<TOrder0> {
     int batchInsert(List<TOrder0> list);
-    List<TOrder0> selectById(String id);
+    public List<TOrder0> selectById(String tableName, String id);
     /*int deleteByPrimaryKey(Long orderId);
 
     int insert(TOrder0 record);

@@ -4,6 +4,7 @@ import com.IBaseMapper;
 import com.gennlife.domain.TOrder0;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.cache.annotation.EnableCaching;
 
 import java.util.List;
 
@@ -35,7 +36,8 @@ public interface TOrder0Mapper extends IBaseMapper<TOrder0> {
     int updateBatch(List<TOrder0> list);
 
     int batchInsert(@Param("list") List<TOrder0> list);
-    @Select("select * from t_order where order_id= ?")
-    List<TOrder0> selectById(String id);
+
+    @Select({"select * from t_order where user_id= #{userId}"})
+    List<TOrder0> selectById(@Param("userId") Long userId);
 
 }

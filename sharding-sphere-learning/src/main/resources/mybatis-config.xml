@@ -5,5 +5,7 @@
 <configuration>
     <settings>
         <setting name="logImpl" value="STDOUT_LOGGING" />
+        <!-- 开启缓存 -->
+        <setting name="cacheEnabled" value="true" />
     </settings>
 </configuration>
