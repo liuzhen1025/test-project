@@ -1,10 +1,12 @@
 package com.gennlife;
 
 
+import com.gennlife.dao.TOrder0Mapper;
 import com.gennlife.domain.TOrder0;
 import com.gennlife.service.TOrder0Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.io.FileUtils;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -20,7 +22,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 腾讯内容安全接口封装框架 https://gitee.com/xshuai/taip
+ * 腾讯内容安全接口封装框架
+ * 【https://gitee.com/xshuai/taip 】
+ * 百度AI大脑
+ * 【http://ai.baidu.com/solution/censoring?track=cp:ainsem|pf:pc|pp:chanpin-neirongshenhe|pu:neirongshenhe|ci:|kw:10001733】
+ *
  * Hello world!
  *
  */
@@ -31,8 +37,11 @@ public class App
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         TOrder0Service orderService = (TOrder0Service)context.getBean("order0Service");
+        TOrder0Mapper TOrder0Mapper = (TOrder0Mapper)context.getBean("tOrder0Mapper");
         final JdbcTemplate jdbcTemplate = (JdbcTemplate)context.getBean("jdbcTemplate");
         List<TOrder0> lists = new ArrayList<>(20);
+        int i = TOrder0Mapper.selectCount(new TOrder0());
+        System.out.println();
         /*for (long i = 2000151; i<2000191; i++) {
             TOrder0 order0 = new TOrder0();
             order0.setGoodsName("测试"+i);

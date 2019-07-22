@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * @author liuzhen278
  * @title: EnablePage
  * @projectName mytest-project
- * @description: TODO
+ * @description: 次注解只能作用在方法上
  * @date 2019/7/59:58
  */
 @Retention(RetentionPolicy.RUNTIME)

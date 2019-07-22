@@ -1,15 +1,11 @@
 package com.gennlife.annotation;
 
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.apache.commons.beanutils.BeanUtils;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
-import java.util.List;
 
 /**
  * @author liuzhen278
@@ -26,19 +21,20 @@ import java.util.List;
  * @description: TODO
  * @date 2019/7/510:02
  */
+/**@Pointcut("@annotation(com.gennlife.annotation.EnablePage)")
+public void enablePage() {
+}*/
 @Aspect
 @Component
 public class EnablePageIntercepter {
     private static Logger LOG = LoggerFactory.getLogger(EnablePageIntercepter.class);
-    /*@Pointcut("@annotation(com.gennlife.annotation.EnablePage)")
-    public void enablePage() {
-    }*/
+
     @Before("@annotation(enablePage)")
     public void doPage(JoinPoint joinPoint, EnablePage enablePage){
         Object[] args = joinPoint.getArgs();
         try {
-            int pageNum;
-            int pageSize;
+            Integer pageNum;
+            Integer pageSize;
             String orderBy = "";
             for (Object o:args) {
                 pageNum = Integer.valueOf(StringUtils.isEmpty(BeanUtils.getProperty(o, "pageNum"))? "0":BeanUtils.getProperty(o, "pageNum"));
@@ -50,7 +46,7 @@ public class EnablePageIntercepter {
                 PageHelper.orderBy(orderBy);
             }
         } catch (Throwable e) {
-        } finally {
+            LOG.error("设置分页及排序信息异常：{}",e);
         }
     }
     private Method getMethod(JoinPoint jp) throws NoSuchMethodException {
