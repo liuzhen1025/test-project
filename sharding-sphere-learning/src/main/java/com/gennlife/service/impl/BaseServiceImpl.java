@@ -4,6 +4,7 @@ import com.IBaseMapper;
 import com.gennlife.annotation.EnablePage;
 import com.gennlife.domain.BaseEntity;
 import com.gennlife.service.BaseService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +21,7 @@ import java.util.List;
  * @date 2019/7/410:05
  */
 @Transactional(rollbackFor = Exception.class)
-public abstract class BaseServiceImpl<T> implements BaseService<T> {
+public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseService<T> {
 
     protected IBaseMapper<T> baseMapper;
     public BaseServiceImpl(IBaseMapper baseMapper){
@@ -48,6 +49,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
      　　*/
     @Override
     public int delete(T t) {
+
         return baseMapper.delete(t);
     }
     /**
@@ -309,11 +311,12 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         criteria.orEqualTo(t);
         return this.selectByCondition(example);
     }
-    @EnablePage
+    //@EnablePage
     @Override
     public PageInfo<T> selectByEntityWithPage(T t) {
         List<T> list = this.select(t);
         //PageInfo<T> pageInfo = new PageInfo<>(select==null? new ArrayList<T>():select);
+
         return this.convertToPage(list);
     }
     @EnablePage
@@ -322,10 +325,10 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         List<T> ts = this.selectByExample(t);
         return this.convertToPage(ts);
     }
-    @EnablePage
+   // @EnablePage
     @Override
     public PageInfo<T> selectByConditonWithPage(T t) {
-        List<T> ts = this.selectByCondition(t);
+        List<T> ts = this.select(t);
         return this.convertToPage(ts);
     }
 

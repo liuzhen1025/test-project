@@ -4,6 +4,7 @@ package com.gennlife;
 import com.gennlife.dao.TOrder0Mapper;
 import com.gennlife.domain.TOrder0;
 import com.gennlife.service.TOrder0Service;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.io.FileUtils;
@@ -37,11 +38,10 @@ public class App
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         TOrder0Service orderService = (TOrder0Service)context.getBean("order0Service");
-        TOrder0Mapper TOrder0Mapper = (TOrder0Mapper)context.getBean("tOrder0Mapper");
         final JdbcTemplate jdbcTemplate = (JdbcTemplate)context.getBean("jdbcTemplate");
-        List<TOrder0> lists = new ArrayList<>(20);
-        int i = TOrder0Mapper.selectCount(new TOrder0());
-        System.out.println();
+        /*List<TOrder0> lists = new ArrayList<>(20);
+        int i = TOrder0Mapper.selectCount(new TOrder0());*/
+        //System.out.println();
         /*for (long i = 2000151; i<2000191; i++) {
             TOrder0 order0 = new TOrder0();
             order0.setGoodsName("测试"+i);
@@ -51,15 +51,18 @@ public class App
         }
         int i = orderService.batchInsert(lists);
         System.out.println(i);*/
-        /**/TOrder0 order0 = new TOrder0();
+        TOrder0 order0 = new TOrder0();
         order0.setUserId(13L);
         order0.setPageNum(5);
         order0.setPageSize(10);
-        order0.setOrderBy("user_id desc,order_id asc");
+        order0.setOrderBy("order_id desc");
+        PageInfo<TOrder0> pageInfo = orderService.selectByConditonWithPage(order0);
+        List<TOrder0> list = pageInfo.getList();
+        System.out.println(pageInfo);
         //List<TOrder0> select = orderService.select(order0);
-        long start = System.currentTimeMillis();
+        /*long start = System.currentTimeMillis();
         List<TOrder0> tOrder0s = orderService.select(order0);
-        List<TOrder0> tOrder0s1 = orderService.select(order0);
+        List<TOrder0> tOrder0s1 = orderService.select(order0);*/
         System.out.println();
         //orderService.insert(order0);
         //orderService.updateByPrimaryKey(order0);

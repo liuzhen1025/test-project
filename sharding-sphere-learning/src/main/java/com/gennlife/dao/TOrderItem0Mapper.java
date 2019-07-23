@@ -1,11 +1,12 @@
 package com.gennlife.dao;
 
 import com.IBaseMapper;
+import com.gennlife.domain.BaseEntity;
 import com.gennlife.domain.TOrderItem0;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface TOrderItem0Mapper extends IBaseMapper<TOrderItem0> {
+public interface TOrderItem0Mapper<T extends BaseEntity> extends IBaseMapper<TOrderItem0> {
 
     int updateBatch(List<TOrderItem0> list);
 

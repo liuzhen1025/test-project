@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
  * @author liuzhen278
  * @title: EnablePage
  * @projectName mytest-project
- * @description: 次注解只能作用在方法上
+ * @description: 此注解只能作用在方法上
  * @date 2019/7/59:58
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface EnablePage {
-    String enable() default "true";
+    boolean enable() default true;
 }

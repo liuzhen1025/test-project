@@ -13,7 +13,7 @@ import java.util.List;
  * @description: TODO
  * @date 2019/7/410:04
  */
-public interface BaseService<T> extends IBaseMapper<T> {
+public interface BaseService<T extends BaseEntity> extends IBaseMapper<T> {
     public PageInfo<T> convertToPage(List<T> object);
     public PageInfo<T> selectByEntityWithPage(T t);
     public PageInfo<T> selectByExampleWithPage(T t);

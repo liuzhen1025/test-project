@@ -4,7 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Table(name = "t_order_item0")
-public class TOrderItem0 implements Serializable {
+public class TOrderItem0 extends BaseEntity implements Serializable {
 
     @Id
     @Column(name = "order_item_id")

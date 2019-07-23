@@ -1,5 +1,6 @@
 package com;
 
+import com.gennlife.domain.BaseEntity;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.CacheNamespaceRef;
 import org.springframework.cache.annotation.CacheEvict;
@@ -16,6 +17,6 @@ import tk.mybatis.mapper.common.*;
  */
 @CacheNamespace
 @EnableCaching
-public interface IBaseMapper<T> extends BaseMapper<T>, MySqlMapper<T>, IdsMapper<T>, ConditionMapper<T>, ExampleMapper<T> {
+public interface IBaseMapper<T extends BaseEntity> extends BaseMapper<T>, MySqlMapper<T>, IdsMapper<T>, ConditionMapper<T>, ExampleMapper<T> {
 
 }

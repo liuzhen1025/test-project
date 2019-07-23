@@ -1,3 +1,4 @@
+/*
 package com.gennlife.service.impl;
 
 import org.springframework.stereotype.Service;
@@ -7,13 +8,15 @@ import com.gennlife.dao.TOrderItem0Mapper;
 import com.gennlife.domain.TOrderItem0;
 import com.gennlife.service.TOrderItem0Service;
 
+*/
 /**
  * @author liuzhen278
  * @title: ${NAME}
  * @projectName mytest-project
  * @description: TODO
  * @date 2019/7/49:17
- */
+ *//*
+
 @Service
 public class TOrderItem0ServiceImpl implements TOrderItem0Service {
 
@@ -72,3 +75,4 @@ public class TOrderItem0ServiceImpl implements TOrderItem0Service {
 
 }
 
+*/
